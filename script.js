@@ -8,6 +8,8 @@ const closeModalBtn = document.getElementById("close-modal-btn");
 const cartCounter = document.getElementById("cart-count");
 const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
+const checkoutForm = document.getElementById("checkout-form");
+const checkoutWarn = document.getElementById("checkout-warn");
 
 let cart = [];
 
@@ -28,8 +30,18 @@ let cart = [];
 //   cartModal.style.display = "none";
 // });
 // Abre o diálogo e posiciona o foco no início do conteúdo.
+// cartBtn.addEventListener("click", function () {
+//   updateCartModal();
+
+//   cartModal.showModal();
+
+//   const cartTitle = document.getElementById("cart-title");
+//   cartTitle.focus();
+// });
 cartBtn.addEventListener("click", function () {
   updateCartModal();
+
+  checkoutWarn.hidden = true;
 
   cartModal.showModal();
 
@@ -175,12 +187,43 @@ function removeItemCart(name) {
   updateCartModal();
 }
 
-addressInput.addEventListener("input", function (event) {
-  let inputValue = event.target.inputValue;
+// addressInput.addEventListener("input", function (event) {
+//   let inputValue = event.target.inputValue;
 
-  if (inputValue !== "") {
-    addressInput.classList.remove("border-red-500");
-    addressWarn.classList.add("hidden");
+//   if (inputValue !== "") {
+//     addressInput.classList.remove("border-red-500");
+//     addressWarn.classList.add("hidden");
+//   }
+// });
+function getAddressError(value) {
+  const address = value.trim();
+
+  if (address.length === 0) {
+    return "Informe o endereço de entrega.";
+  }
+
+  if (address.length > 300) {
+    return "O endereço deve ter no máximo 300 caracteres.";
+  }
+
+  return "";
+}
+
+function setAddressError(message) {
+  const hasError = message !== "";
+
+  addressWarn.textContent = message;
+  addressWarn.hidden = !hasError;
+
+  addressInput.setAttribute("aria-invalid", hasError ? "true" : "false");
+
+  addressInput.classList.toggle("border-red-500", hasError);
+}
+
+addressInput.addEventListener("input", function () {
+  // Reavalia o campo quando já existe um erro apresentado.
+  if (addressInput.getAttribute("aria-invalid") === "true") {
+    setAddressError(getAddressError(addressInput.value));
   }
 });
 
@@ -192,8 +235,84 @@ function buildWhatsAppUrl(phone, message) {
   return url.href;
 }
 
-checkoutBtn.addEventListener("click", function () {
+// checkoutBtn.addEventListener("click", function () {
+//   const isOpen = checkRestaurantOpen();
+//   if (!isOpen) {
+//     Toastify({
+//       text: "Ops! Não estamos funcionando!",
+//       duration: 3000,
+//       close: true,
+//       gravity: "top",
+//       position: "right",
+//       stopOnFocus: true,
+//       style: {
+//         background: "#ef4444",
+//       },
+//     }).showToast();
+//     return;
+//   }
+
+//   if (cart.length === 0) return;
+//   if (addressInput.value === "") {
+//     addressWarn.classList.remove("hidden");
+//     addressInput.classList.add("border-red-500");
+//     return;
+//   }
+
+//   //Enviar o pedido para api whats
+//   const cartItems = cart
+//     .map((item) => {
+//       return `${item.name} Quantidade: (${item.quantity} Preço: R$${item.price} |`;
+//     })
+//     .join("");
+
+//   // const message = encodeURIComponent(cartItems);
+//   // const phone = "61992890048";
+
+//   // window.open(
+//   //   `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
+//   //   "_blank",
+//   // );
+//   const phone = "5561992890048";
+
+//   const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
+//     "\n",
+//   );
+
+//   const whatsappUrl = buildWhatsAppUrl(phone, message);
+
+//   window.open(whatsappUrl, "_blank");
+
+//   // cart = [];
+//   // updateCartModal();
+// });
+checkoutForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  checkoutWarn.hidden = true;
+  checkoutWarn.textContent = "";
+
+  if (cart.length === 0) {
+    checkoutWarn.textContent =
+      "Seu carrinho está vazio. Adicione um produto para continuar.";
+
+    checkoutWarn.hidden = false;
+    checkoutWarn.focus();
+
+    return;
+  }
+
+  const addressError = getAddressError(addressInput.value);
+
+  setAddressError(addressError);
+
+  if (addressError) {
+    addressInput.focus();
+    return;
+  }
+
   const isOpen = checkRestaurantOpen();
+
   if (!isOpen) {
     Toastify({
       text: "Ops! Não estamos funcionando!",
@@ -206,30 +325,16 @@ checkoutBtn.addEventListener("click", function () {
         background: "#ef4444",
       },
     }).showToast();
+
     return;
   }
 
-  if (cart.length === 0) return;
-  if (addressInput.value === "") {
-    addressWarn.classList.remove("hidden");
-    addressInput.classList.add("border-red-500");
-    return;
-  }
-
-  //Enviar o pedido para api whats
   const cartItems = cart
     .map((item) => {
       return `${item.name} Quantidade: (${item.quantity} Preço: R$${item.price} |`;
     })
     .join("");
 
-  // const message = encodeURIComponent(cartItems);
-  // const phone = "61992890048";
-
-  // window.open(
-  //   `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
-  //   "_blank",
-  // );
   const phone = "5561992890048";
 
   const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
@@ -239,9 +344,6 @@ checkoutBtn.addEventListener("click", function () {
   const whatsappUrl = buildWhatsAppUrl(phone, message);
 
   window.open(whatsappUrl, "_blank");
-
-  // cart = [];
-  // updateCartModal();
 });
 
 //Verificar a hora e manipular o card horario
