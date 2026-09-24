@@ -11,21 +11,59 @@ const addressWarn = document.getElementById("address-warn");
 
 let cart = [];
 
-// Abrir o modal do carrinho
+// // Abrir o modal do carrinho
+// cartBtn.addEventListener("click", function () {
+//   updateCartModal();
+//   cartModal.style.display = "flex";
+// });
+
+// // Fechar o modal quando clicar fora
+// cartModal.addEventListener("click", function (event) {
+//   if (event.target === cartModal) {
+//     cartModal.style.display = "none";
+//   }
+// });
+
+// closeModalBtn.addEventListener("click", function () {
+//   cartModal.style.display = "none";
+// });
+// Abre o diálogo e posiciona o foco no início do conteúdo.
 cartBtn.addEventListener("click", function () {
   updateCartModal();
-  cartModal.style.display = "flex";
+
+  cartModal.showModal();
+
+  const cartTitle = document.getElementById("cart-title");
+  cartTitle.focus();
 });
 
-// Fechar o modal quando clicar fora
+// Fecha pelo botão.
+closeModalBtn.addEventListener("click", function () {
+  cartModal.close();
+});
+
+// Fecha ao clicar fora dos limites do diálogo.
 cartModal.addEventListener("click", function (event) {
-  if (event.target === cartModal) {
-    cartModal.style.display = "none";
+  if (event.target !== cartModal) {
+    return;
+  }
+
+  const rect = cartModal.getBoundingClientRect();
+
+  const clickedOutside =
+    event.clientX < rect.left ||
+    event.clientX > rect.right ||
+    event.clientY < rect.top ||
+    event.clientY > rect.bottom;
+
+  if (clickedOutside) {
+    cartModal.close();
   }
 });
 
-closeModalBtn.addEventListener("click", function () {
-  cartModal.style.display = "none";
+// Devolve o foco ao botão que abre o carrinho.
+cartModal.addEventListener("close", function () {
+  cartBtn.focus();
 });
 
 menu.addEventListener("click", function (event) {
@@ -102,20 +140,39 @@ cartItemsContainer.addEventListener("click", function (event) {
   }
 });
 
+// atualização abaixo, excluir depois
+// function removeItemCart(name) {
+//   const index = cart.findIndex((item) => item.name === name);
+
+//   if (index !== 1) {
+//     const item = cart[index];
+
+//     if (item.quantity > 1) {
+//       item.quantity -= 1;
+//       updateCartModal();
+//       return;
+//     }
+//     cart.splice(index, 1);
+//     updateCartModal();
+//   }
+// }
 function removeItemCart(name) {
   const index = cart.findIndex((item) => item.name === name);
 
-  if (index !== 1) {
-    const item = cart[index];
-
-    if (item.quantity > 1) {
-      item.quantity -= 1;
-      updateCartModal();
-      return;
-    }
-    cart.splice(index, 1);
-    updateCartModal();
+  // Encerra sem alterar o carrinho se o produto não existir.
+  if (index === -1) {
+    return;
   }
+
+  const item = cart[index];
+
+  if (item.quantity > 1) {
+    item.quantity -= 1;
+  } else {
+    cart.splice(index, 1);
+  }
+
+  updateCartModal();
 }
 
 addressInput.addEventListener("input", function (event) {
@@ -126,6 +183,14 @@ addressInput.addEventListener("input", function (event) {
     addressWarn.classList.add("hidden");
   }
 });
+
+function buildWhatsAppUrl(phone, message) {
+  const url = new URL(`https://wa.me/${phone}`);
+
+  url.searchParams.set("text", message);
+
+  return url.href;
+}
 
 checkoutBtn.addEventListener("click", function () {
   const isOpen = checkRestaurantOpen();
@@ -158,16 +223,25 @@ checkoutBtn.addEventListener("click", function () {
     })
     .join("");
 
-  const message = encodeURIComponent(cartItems);
-  const phone = "61992890048";
+  // const message = encodeURIComponent(cartItems);
+  // const phone = "61992890048";
 
-  window.open(
-    `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
-    "_blank",
+  // window.open(
+  //   `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
+  //   "_blank",
+  // );
+  const phone = "5561992890048";
+
+  const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
+    "\n",
   );
 
-  cart = [];
-  updateCartModal();
+  const whatsappUrl = buildWhatsAppUrl(phone, message);
+
+  window.open(whatsappUrl, "_blank");
+
+  // cart = [];
+  // updateCartModal();
 });
 
 //Verificar a hora e manipular o card horario

@@ -887,6 +887,10 @@ video {
   height: 100%;
 }
 
+.min-h-\[44px\] {
+  min-height: 44px;
+}
+
 .w-28 {
   width: 7rem;
 }
@@ -1443,6 +1447,10 @@ video {
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .gap-7 {
@@ -2101,6 +2109,16 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2610,6 +2628,27 @@ video {
 
 body {
   border-color: #f6f7f8;
+}
+
+.cart-dialog {
+  box-sizing: border-box;
+  width: min(40rem, calc(100% - 2rem));
+  max-width: calc(100% - 2rem);
+  /* Fallback para navegadores sem suporte a dvh. */
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  border: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cart-dialog::backdrop {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+html:has(.cart-dialog[open]) {
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
