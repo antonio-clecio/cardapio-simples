@@ -44,7 +44,9 @@
   </head>
   <body>
     <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
-      <div class="w-full h-full flex flex-col justify-center items-center">
+      <div
+        class="w-full h-full flex flex-col justify-center items-center bg-black/60"
+      >
         <img
           src="./assets/logo-spaceburguer.jpg"
           alt="Logo DevBurguer"
@@ -52,7 +54,7 @@
         />
         <h1 class="text-4xl mt-4 mb-2 font-bold text-white">SPACE BURGUER</h1>
         <span class="text-white font-medium">Rua dev 10, Novo Gama - GO</span>
-        <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
+        <div class="bg-green-700 px-4 py-1 rounded-lg mt-5" id="date-span">
           <span class="text-white font-medium">Seg. a Dom. - 18h às 22h</span>
         </div>
       </div>
@@ -422,7 +424,7 @@
       <form id="checkout-form" novalidate>
         <p
           id="checkout-warn"
-          class="text-red-500 mt-4"
+          class="text-red-700 mt-4"
           role="alert"
           tabindex="-1"
           hidden
@@ -438,14 +440,14 @@
           name="address"
           autocomplete="street-address"
           placeholder="Rua, número, bairro e complemento"
-          class="w-full border-2 p-1 rounded my-1"
+          class="w-full border-2 border-gray-500 text-gray-900 placeholder:text-gray-600 p-1 rounded my-1"
           required
           maxlength="300"
           aria-describedby="address-warn"
           aria-invalid="false"
         />
 
-        <p id="address-warn" class="text-red-500" role="alert" hidden></p>
+        <p id="address-warn" class="text-red-700" role="alert" hidden></p>
 
         <div
           class="flex flex-wrap items-center justify-between gap-3 mt-5 w-full"
@@ -455,7 +457,7 @@
           <button
             type="submit"
             id="checkout-btn"
-            class="bg-green-500 text-white px-4 py-1 rounded"
+            class="bg-green-700 text-white px-4 py-1 rounded"
           >
             Enviar pedido
           </button>
@@ -463,7 +465,7 @@
       </form>
     </dialog>
     <footer
-      class="w-full bg-red-500 py-3 fixed bottom-0 z-40 flex items-center justify-center"
+      class="w-full bg-red-700 py-3 fixed bottom-0 z-40 flex items-center justify-center"
     >
       <button
         class="flex items-center gap-2 text-white font-bold"

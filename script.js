@@ -209,6 +209,16 @@ function getAddressError(value) {
   return "";
 }
 
+// function setAddressError(message) {
+//   const hasError = message !== "";
+
+//   addressWarn.textContent = message;
+//   addressWarn.hidden = !hasError;
+
+//   addressInput.setAttribute("aria-invalid", hasError ? "true" : "false");
+
+//   addressInput.classList.toggle("border-red-500", hasError);
+// }
 function setAddressError(message) {
   const hasError = message !== "";
 
@@ -217,7 +227,8 @@ function setAddressError(message) {
 
   addressInput.setAttribute("aria-invalid", hasError ? "true" : "false");
 
-  addressInput.classList.toggle("border-red-500", hasError);
+  addressInput.classList.toggle("border-gray-500", !hasError);
+  addressInput.classList.toggle("border-red-700", hasError);
 }
 
 addressInput.addEventListener("input", function () {
@@ -322,7 +333,8 @@ checkoutForm.addEventListener("submit", function (event) {
       position: "right",
       stopOnFocus: true,
       style: {
-        background: "#ef4444",
+        background: "#b91c1c",
+        color: "#ffffff",
       },
     }).showToast();
 
@@ -357,9 +369,9 @@ const spanItem = document.getElementById("date-span");
 const isOpen = checkRestaurantOpen();
 
 if (isOpen) {
-  spanItem.classList.remove("bg-red-500");
-  spanItem.classList.add("bg-green-600");
+  spanItem.classList.remove("bg-red-700");
+  spanItem.classList.add("bg-green-700");
 } else {
-  spanItem.classList.remove("bg-green-600");
-  spanItem.classList.add("bg-red-500");
+  spanItem.classList.remove("bg-green-700");
+  spanItem.classList.add("bg-red-700");
 }

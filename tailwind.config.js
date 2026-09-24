@@ -7,7 +7,7 @@ module.exports = {
         sans: ["Ubuntu", "sans-serif"],
       },
       backgroundImage: {
-        home: "url('/assets/bg.png')",
+        home: "url('/assets/bg-capa-spaceburguer.jpg')",
       },
     },
   },
