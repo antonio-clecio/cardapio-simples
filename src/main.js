@@ -563,19 +563,28 @@ checkoutForm.addEventListener("submit", function (event) {
 
   const isOpen = checkRestaurantOpen();
 
+  // if (!isOpen) {
+  //   Toastify({
+  //     text: "Ops! Não estamos funcionando!",
+  //     duration: 3000,
+  //     close: true,
+  //     gravity: "top",
+  //     position: "right",
+  //     stopOnFocus: true,
+  //     style: {
+  //       background: "#b91c1c",
+  //       color: "#ffffff",
+  //     },
+  //   }).showToast();
+
+  //   return;
+  // }
   if (!isOpen) {
-    Toastify({
-      text: "Ops! Não estamos funcionando!",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "#b91c1c",
-        color: "#ffffff",
-      },
-    }).showToast();
+    checkoutWarn.textContent =
+      "Estamos fechados no momento. Consulte nosso horário de funcionamento no início da página.";
+
+    checkoutWarn.hidden = false;
+    checkoutWarn.focus();
 
     return;
   }
