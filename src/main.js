@@ -1,4 +1,13 @@
-import { getProductById } from "./data/products.js";
+// import { getProductById } from "./data/products.js";
+// import { assertCents, formatBRL } from "./domain/money.js";
+import { formatBRL } from "./domain/money.js";
+
+import {
+  addItem,
+  removeItem,
+  getCartSummary,
+  CartLimitError,
+} from "./domain/cart.js";
 
 const menu = document.getElementById("menu");
 const cartBtn = document.getElementById("cart-btn");
@@ -12,8 +21,49 @@ const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const checkoutForm = document.getElementById("checkout-form");
 const checkoutWarn = document.getElementById("checkout-warn");
+const cartFeedback = document.getElementById("cart-feedback");
 
 let cart = [];
+
+function clearCartFeedback() {
+  cartFeedback.textContent = "";
+  checkoutWarn.textContent = "";
+  checkoutWarn.hidden = true;
+}
+
+function showCartError(error) {
+  const message =
+    error instanceof CartLimitError
+      ? error.message
+      : "Não foi possível atualizar o carrinho. Tente novamente.";
+
+  const feedback = cartModal.open ? checkoutWarn : cartFeedback;
+
+  feedback.textContent = message;
+  feedback.hidden = false;
+  feedback.focus();
+
+  if (!(error instanceof CartLimitError)) {
+    console.error(error);
+  }
+}
+
+function applyCartChange(operation, productId) {
+  try {
+    const nextCart = operation(cart, productId);
+    const summary = getCartSummary(nextCart);
+
+    updateCartModal(summary);
+
+    cart = nextCart;
+    clearCartFeedback();
+
+    return true;
+  } catch (error) {
+    showCartError(error);
+    return false;
+  }
+}
 
 // // Abrir o modal do carrinho
 // cartBtn.addEventListener("click", function () {
@@ -40,15 +90,27 @@ let cart = [];
 //   const cartTitle = document.getElementById("cart-title");
 //   cartTitle.focus();
 // });
+// cartBtn.addEventListener("click", function () {
+//   updateCartModal();
+
+//   checkoutWarn.hidden = true;
+
+//   cartModal.showModal();
+
+//   const cartTitle = document.getElementById("cart-title");
+//   cartTitle.focus();
+// });
 cartBtn.addEventListener("click", function () {
-  updateCartModal();
+  try {
+    updateCartModal();
+    clearCartFeedback();
 
-  checkoutWarn.hidden = true;
+    cartModal.showModal();
 
-  cartModal.showModal();
-
-  const cartTitle = document.getElementById("cart-title");
-  cartTitle.focus();
+    document.getElementById("cart-title").focus();
+  } catch (error) {
+    showCartError(error);
+  }
 });
 
 // Fecha pelo botão.
@@ -197,10 +259,10 @@ cartModal.addEventListener("close", function () {
 //     addressWarn.classList.add("hidden");
 //   }
 // });
-const currencyFormatter = new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL",
-});
+// const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+//   style: "currency",
+//   currency: "BRL",
+// });
 
 menu.addEventListener("click", function (event) {
   if (!(event.target instanceof Element)) return;
@@ -212,18 +274,21 @@ menu.addEventListener("click", function (event) {
   addToCart(button.dataset.productId);
 });
 
+// function addToCart(productId) {
+//   if (!getProductById(productId)) return;
+
+//   const existingItem = cart.find((item) => item.productId === productId);
+
+//   if (existingItem) {
+//     existingItem.quantity += 1;
+//   } else {
+//     cart.push({ productId, quantity: 1 });
+//   }
+
+//   updateCartModal();
+// }
 function addToCart(productId) {
-  if (!getProductById(productId)) return;
-
-  const existingItem = cart.find((item) => item.productId === productId);
-
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({ productId, quantity: 1 });
-  }
-
-  updateCartModal();
+  applyCartChange(addItem, productId);
 }
 
 function createCartItemElement(product, quantity) {
@@ -241,7 +306,8 @@ function createCartItemElement(product, quantity) {
 
   const price = document.createElement("p");
   price.className = "font-medium mt-2";
-  price.textContent = currencyFormatter.format(product.price);
+  // price.textContent = currencyFormatter.format(product.price);
+  price.textContent = formatBRL(product.priceCents);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
@@ -259,20 +325,53 @@ function createCartItemElement(product, quantity) {
   return row;
 }
 
-function updateCartModal() {
+// function updateCartModal() {
+//   const fragment = document.createDocumentFragment();
+//   let total = 0;
+
+//   for (const item of cart) {
+//     const product = getProductById(item.productId);
+
+//     fragment.append(createCartItemElement(product, item.quantity));
+//     total += product.price * item.quantity;
+//   }
+
+//   cartItemsContainer.replaceChildren(fragment);
+//   cartTotal.textContent = currencyFormatter.format(total);
+//   cartCounter.textContent = cart.length;
+// }
+// function updateCartModal() {
+//   const fragment = document.createDocumentFragment();
+//   let totalCents = 0;
+
+//   for (const item of cart) {
+//     const product = getProductById(item.productId);
+//     const subtotalCents = product.priceCents * item.quantity;
+
+//     assertCents(subtotalCents, "Subtotal do produto");
+
+//     totalCents += subtotalCents;
+
+//     assertCents(totalCents, "Total do carrinho");
+
+//     fragment.append(createCartItemElement(product, item.quantity));
+//   }
+
+//   cartItemsContainer.replaceChildren(fragment);
+//   cartTotal.textContent = formatBRL(totalCents);
+//   cartCounter.textContent = cart.length;
+// }
+function updateCartModal(summary = getCartSummary(cart)) {
   const fragment = document.createDocumentFragment();
-  let total = 0;
 
-  for (const item of cart) {
-    const product = getProductById(item.productId);
-
-    fragment.append(createCartItemElement(product, item.quantity));
-    total += product.price * item.quantity;
+  for (const item of summary.items) {
+    fragment.append(createCartItemElement(item.product, item.quantity));
   }
 
   cartItemsContainer.replaceChildren(fragment);
-  cartTotal.textContent = currencyFormatter.format(total);
-  cartCounter.textContent = cart.length;
+
+  cartTotal.textContent = formatBRL(summary.totalCents);
+  cartCounter.textContent = summary.items.length;
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
@@ -285,18 +384,32 @@ cartItemsContainer.addEventListener("click", function (event) {
   removeItemCart(button.dataset.productId);
 });
 
+// function removeItemCart(productId) {
+//   const index = cart.findIndex((item) => item.productId === productId);
+
+//   if (index === -1) return;
+
+//   if (cart[index].quantity > 1) {
+//     cart[index].quantity -= 1;
+//   } else {
+//     cart.splice(index, 1);
+//   }
+
+//   updateCartModal();
+// }
 function removeItemCart(productId) {
-  const index = cart.findIndex((item) => item.productId === productId);
+  if (!applyCartChange(removeItem, productId)) return;
 
-  if (index === -1) return;
+  const buttons = [
+    ...cartItemsContainer.querySelectorAll(".remove-from-cart-btn"),
+  ];
 
-  if (cart[index].quantity > 1) {
-    cart[index].quantity -= 1;
-  } else {
-    cart.splice(index, 1);
-  }
+  const focusTarget =
+    buttons.find((button) => button.dataset.productId === productId) ??
+    buttons[0] ??
+    closeModalBtn;
 
-  updateCartModal();
+  focusTarget.focus();
 }
 
 function getAddressError(value) {
@@ -402,12 +515,32 @@ function buildWhatsAppUrl(phone, message) {
 //   // updateCartModal();
 // });
 checkoutForm.addEventListener("submit", function (event) {
+  // event.preventDefault();
+
+  // checkoutWarn.hidden = true;
+  // checkoutWarn.textContent = "";
+
+  // if (cart.length === 0) {
+  //   checkoutWarn.textContent =
+  //     "Seu carrinho está vazio. Adicione um produto para continuar.";
+
+  //   checkoutWarn.hidden = false;
+  //   checkoutWarn.focus();
+
+  //   return;
   event.preventDefault();
+  clearCartFeedback();
 
-  checkoutWarn.hidden = true;
-  checkoutWarn.textContent = "";
+  let summary;
 
-  if (cart.length === 0) {
+  try {
+    summary = getCartSummary(cart);
+  } catch (error) {
+    showCartError(error);
+    return;
+  }
+
+  if (summary.items.length === 0) {
     checkoutWarn.textContent =
       "Seu carrinho está vazio. Adicione um produto para continuar.";
 
@@ -450,19 +583,31 @@ checkoutForm.addEventListener("submit", function (event) {
   //     return `${item.name} Quantidade: (${item.quantity} Preço: R$${item.price} |`;
   //   })
   //   .join("");
-  const cartItems = cart
-    .map((item) => {
-      const product = getProductById(item.productId);
+  // const cartItems = cart
+  //   .map((item) => {
+  //     const product = getProductById(item.productId);
 
-      return `${product.name} | Quantidade: ${item.quantity} | Preço unitário: ${currencyFormatter.format(product.price)}`;
+  //     return `${product.name} | Quantidade: ${item.quantity} | Preço unitário: ${currencyFormatter.format(product.price)}`;
+  //   })
+  //   .join("\n");
+
+  // const phone = "5561992890048";
+
+  // const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
+  //   "\n",
+  // );
+  // const cartItems = cart
+  //   .map((item) => {
+  //     const product = getProductById(item.productId);
+
+  //     return `${product.name} | Quantidade: ${item.quantity} | Preço unitário: ${formatBRL(product.priceCents)}`;
+  //   })
+  //   .join("\n");
+  const cartItems = summary.items
+    .map(({ product, quantity }) => {
+      return `${product.name} | Quantidade: ${quantity} | Preço unitário: ${formatBRL(product.priceCents)}`;
     })
     .join("\n");
-
-  const phone = "5561992890048";
-
-  const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
-    "\n",
-  );
 
   const whatsappUrl = buildWhatsAppUrl(phone, message);
 

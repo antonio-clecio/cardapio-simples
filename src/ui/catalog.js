@@ -1,7 +1,8 @@
-const currencyFormatter = new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL",
-});
+import { formatBRL } from "../domain/money.js";
+// const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+//   style: "currency",
+//   currency: "BRL",
+// });
 
 function escapeHtml(value) {
   const entities = {
@@ -35,7 +36,7 @@ function renderProduct(product) {
         <p class="font-bold">${emoji}${escapeHtml(product.name)}</p>
         ${description}
         <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-          <p class="font-bold text-lg">${currencyFormatter.format(product.price)}</p>
+          <p class="font-bold text-lg">${formatBRL(product.priceCents)}</p>
           <button
             type="button"
             class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"

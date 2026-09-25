@@ -1,3 +1,5 @@
+import { assertCents } from "../domain/money.js";
+
 const catalog = [
   {
     id: "space-classic",
@@ -6,7 +8,7 @@ const catalog = [
     emoji: "🚀",
     description:
       "Pão brioche, hambúrguer bovino artesanal de 150g, queijo cheddar derretido, alface americana, tomate fresco e molho especial da casa.",
-    price: 24.9,
+    priceCents: 2490,
     image: "./assets/hamb-1.png",
     imageAlt: "Hambúrguer Space Classic",
   },
@@ -17,7 +19,7 @@ const catalog = [
     emoji: "🌕",
     description:
       "Hambúrguer bovino de 180g, cheddar cremoso, bacon crocante em dobro, cebola caramelizada e molho barbecue no pão australiano.",
-    price: 32.9,
+    priceCents: 3290,
     image: "./assets/hamb-2.png",
     imageAlt: "Hambúrguer Lunar Bacon",
   },
@@ -28,7 +30,7 @@ const catalog = [
     emoji: "🪐",
     description:
       "Dois hambúrgueres bovinos de 120g, queijo prato, anéis de cebola empanados, alface, picles e molho Space Burger.",
-    price: 36.9,
+    priceCents: 3690,
     image: "./assets/hamb-3.png",
     imageAlt: "Hambúrguer Saturn Ring",
   },
@@ -39,7 +41,7 @@ const catalog = [
     emoji: "☄️",
     description:
       "Hambúrguer bovino de 180g, queijo pepper jack, jalapeños, cebola roxa, alface crocante e molho spicy.",
-    price: 34.9,
+    priceCents: 3490,
     image: "./assets/hamb-4.png",
     imageAlt: "Hambúrguer Cometa Picante",
   },
@@ -50,7 +52,7 @@ const catalog = [
     emoji: "🌌",
     description:
       "Hambúrguer de 200g, cheddar, bacon crocante, onion rings, ovo frito, alface e molho especial no pão brioche.",
-    price: 42.9,
+    priceCents: 4290,
     image: "./assets/hamb-5.png",
     imageAlt: "Hambúrguer Galáxia Suprema",
   },
@@ -61,7 +63,7 @@ const catalog = [
     emoji: "👽",
     description:
       "Hambúrguer bovino de 150g recheado com cheddar, queijo mussarela derretido, cebola caramelizada e maionese defumada.",
-    price: 38.9,
+    priceCents: 3890,
     image: "./assets/hamb-6.png",
     imageAlt: "Hambúrguer Alien Cheese",
   },
@@ -71,7 +73,7 @@ const catalog = [
     name: "Coca lata",
     emoji: "",
     description: "",
-    price: 6,
+    priceCents: 600,
     image: "./assets/refri-1.png",
     imageAlt: "Coca lata",
   },
@@ -81,7 +83,7 @@ const catalog = [
     name: "Guaraná lata",
     emoji: "",
     description: "",
-    price: 6,
+    priceCents: 600,
     image: "./assets/refri-2.png",
     imageAlt: "Guaraná lata",
   },
@@ -104,6 +106,8 @@ for (const product of products) {
   if (productsById.has(product.id)) {
     throw new Error(`ID de produto duplicado: ${product.id}`);
   }
+
+  assertCents(product.priceCents, `Preço de ${product.id}`);
 
   productsById.set(product.id, product);
 }
