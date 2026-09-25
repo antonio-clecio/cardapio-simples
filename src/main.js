@@ -8,6 +8,8 @@ import {
   getCartSummary,
   CartLimitError,
 } from "./domain/cart.js";
+import { checkRestaurantOpen } from "./domain/business-hours.js";
+import { startStoreStatus } from "./ui/store-status.js";
 
 const menu = document.getElementById("menu");
 const cartBtn = document.getElementById("cart-btn");
@@ -615,19 +617,24 @@ checkoutForm.addEventListener("submit", function (event) {
 });
 
 //Verificar a hora e manipular o card horario
-function checkRestaurantOpen() {
-  const data = new Date();
-  const hora = data.getHours();
-  return hora >= 18 && hora < 22;
-}
+// function checkRestaurantOpen() {
+//   const data = new Date();
+//   const hora = data.getHours();
+//   return hora >= 18 && hora < 22;
+// }
 
-const spanItem = document.getElementById("date-span");
-const isOpen = checkRestaurantOpen();
+// const spanItem = document.getElementById("date-span");
+// const isOpen = checkRestaurantOpen();
 
-if (isOpen) {
-  spanItem.classList.remove("bg-red-700");
-  spanItem.classList.add("bg-green-700");
-} else {
-  spanItem.classList.remove("bg-green-700");
-  spanItem.classList.add("bg-red-700");
-}
+// if (isOpen) {
+//   spanItem.classList.remove("bg-red-700");
+//   spanItem.classList.add("bg-green-700");
+// } else {
+//   spanItem.classList.remove("bg-green-700");
+//   spanItem.classList.add("bg-red-700");
+// }
+startStoreStatus({
+  badge: document.getElementById("date-span"),
+  hoursLabel: document.getElementById("store-hours"),
+  statusLabel: document.getElementById("store-status"),
+});
