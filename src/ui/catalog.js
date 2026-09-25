@@ -40,8 +40,6 @@ function renderProduct(product) {
             type="button"
             class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
             data-product-id="${escapeHtml(product.id)}"
-            data-name="${escapeHtml(product.name)}"
-            data-price="${escapeHtml(product.price)}"
             aria-label="Adicionar ${escapeHtml(product.name)} ao carrinho"
           >
             <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
