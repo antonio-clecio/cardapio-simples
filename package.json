@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tailwindcss -i ./styles/style.css -o ./styles/output.css --watch",
-    "catalog": "node ./scripts/generate-catalog.mjs"
+    "dev": "tailwindcss -i ./styles/style.css -o ./styles/output.css --watch",
+    "catalog": "node ./scripts/generate-catalog.mjs",
+    "build": "node ./scripts/build.mjs"
   },
   "keywords": [],
   "type": "commonjs",
