@@ -31,14 +31,7 @@ html:has(.cart-dialog[open]) {
 }
 
 @layer base {
-  :where(
-    button,
-    a,
-    input,
-    select,
-    textarea,
-    [tabindex]
-  ):focus-visible {
+  :where(button, a, input, select, textarea, [tabindex]):focus-visible {
     outline: 3px solid #1d4ed8;
     outline-offset: 3px;
     box-shadow: 0 0 0 3px #ffffff;
@@ -46,16 +39,9 @@ html:has(.cart-dialog[open]) {
 }
 
 @media (forced-colors: active) {
-  :where(
-    button,
-    a,
-    input,
-    select,
-    textarea,
-    [tabindex]
-  ):focus-visible {
+  :where(button, a, input, select, textarea, [tabindex]):focus-visible {
     outline: 3px solid Highlight;
     outline-offset: 3px;
     box-shadow: none;
   }
-}       
+}

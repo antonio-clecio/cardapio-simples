@@ -62,293 +62,225 @@
     <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">
       Conheça nosso menu
     </h2>
-    <div id="menu">
-      <main
-        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
-      >
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-1.png"
-            alt="Hamburguer Space Classic"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">🚀Space Classic</p>
-            <p class="text-sm">
-              Pão brioche, hambúrguer bovino artesanal de 150g, queijo cheddar
-              derretido, alface americana, tomate fresco e molho especial da
-              casa.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 24,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Space Classic"
-                data-price="24.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Space Classic"
-                data-price="24.90"
-                aria-label="Adicionar Space Classic ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
-
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <!-- CATALOG:START -->
+<main id="menu">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
+        
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-1.png"
+        alt="Hambúrguer Space Classic"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">🚀</span> Space Classic</p>
+        <p class="text-sm">Pão brioche, hambúrguer bovino artesanal de 150g, queijo cheddar derretido, alface americana, tomate fresco e molho especial da casa.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 24,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="space-classic"
+            data-name="Space Classic"
+            data-price="24.9"
+            aria-label="Adicionar Space Classic ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-2.png"
-            alt="Hamburguer Lunar Bacon"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">🌕Lunar Bacon</p>
-            <p class="text-sm">
-              Hambúrguer bovino de 180g, cheddar cremoso, bacon crocante em
-              dobro, cebola caramelizada e molho barbecue no pão australiano.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 32,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Lunar Bacon"
-                data-price="32.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Lunar Bacon"
-                data-price="32.90"
-                aria-label="Adicionar Lunar Bacon ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+      </div>
+    </article>
 
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-2.png"
+        alt="Hambúrguer Lunar Bacon"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">🌕</span> Lunar Bacon</p>
+        <p class="text-sm">Hambúrguer bovino de 180g, cheddar cremoso, bacon crocante em dobro, cebola caramelizada e molho barbecue no pão australiano.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 32,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="lunar-bacon"
+            data-name="Lunar Bacon"
+            data-price="32.9"
+            aria-label="Adicionar Lunar Bacon ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-3.png"
-            alt="Hamburguer Saturn Ring"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">🪐Saturn Ring</p>
-            <p class="text-sm">
-              Dois hambúrgueres bovinos de 120g, queijo prato, anéis de cebola
-              empanados, alface, picles e molho Space Burger.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 36,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Saturn Ring"
-                data-price="36.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Saturn Ring"
-                data-price="36.90"
-                aria-label="Adicionar Saturn Ring ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+      </div>
+    </article>
 
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-3.png"
+        alt="Hambúrguer Saturn Ring"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">🪐</span> Saturn Ring</p>
+        <p class="text-sm">Dois hambúrgueres bovinos de 120g, queijo prato, anéis de cebola empanados, alface, picles e molho Space Burger.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 36,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="saturn-ring"
+            data-name="Saturn Ring"
+            data-price="36.9"
+            aria-label="Adicionar Saturn Ring ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-4.png"
-            alt="Cometa Picante"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">☄️Cometa Picante</p>
-            <p class="text-sm">
-              Hambúrguer bovino de 180g, queijo pepper jack, jalapeños, cebola
-              roxa, alface crocante e molho spicy.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 34,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Cometa Picante"
-                data-price="34.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Cometa Picante"
-                data-price="34.90"
-                aria-label="Adicionar Cometa Picante ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+      </div>
+    </article>
 
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-4.png"
+        alt="Hambúrguer Cometa Picante"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">☄️</span> Cometa Picante</p>
+        <p class="text-sm">Hambúrguer bovino de 180g, queijo pepper jack, jalapeños, cebola roxa, alface crocante e molho spicy.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 34,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="cometa-picante"
+            data-name="Cometa Picante"
+            data-price="34.9"
+            aria-label="Adicionar Cometa Picante ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-5.png"
-            alt="Galáxia Suprema"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">🌌Galáxia Suprema</p>
-            <p class="text-sm">
-              Hambúrguer de 200g, cheddar, bacon crocante, onion rings, ovo
-              frito, alface e molho especial no pão brioche.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 42,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Galáxia Suprema"
-                data-price="42.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Galáxia Suprema"
-                data-price="42.90"
-                aria-label="Adicionar Galáxia Suprema ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+      </div>
+    </article>
 
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-5.png"
+        alt="Hambúrguer Galáxia Suprema"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">🌌</span> Galáxia Suprema</p>
+        <p class="text-sm">Hambúrguer de 200g, cheddar, bacon crocante, onion rings, ovo frito, alface e molho especial no pão brioche.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 42,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="galaxia-suprema"
+            data-name="Galáxia Suprema"
+            data-price="42.9"
+            aria-label="Adicionar Galáxia Suprema ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-        <div class="flex gap-2">
-          <img
-            src="./assets/hamb-6.png"
-            alt="Alien Cheese"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div>
-            <p class="font-bold">👽Alien Cheese</p>
-            <p class="text-sm">
-              Hambúrguer bovino de 150g recheado com cheddar, queijo mussarela
-              derretido, cebola caramelizada e maionese defumada.
-            </p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 38,90</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Alien Cheese"
-                data-price="38.90"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Alien Cheese"
-                data-price="38.90"
-                aria-label="Adicionar Alien Cheese ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+      </div>
+    </article>
 
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/hamb-6.png"
+        alt="Hambúrguer Alien Cheese"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold"><span aria-hidden="true">👽</span> Alien Cheese</p>
+        <p class="text-sm">Hambúrguer bovino de 150g recheado com cheddar, queijo mussarela derretido, cebola caramelizada e maionese defumada.</p>
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 38,90</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="alien-cheese"
+            data-name="Alien Cheese"
+            data-price="38.9"
+            aria-label="Adicionar Alien Cheese ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
-      </main>
+      </div>
+    </article>
+      </div>
       <div class="mx-auto max-w-7xl px-2 my-2">
         <h2 class="font-bold text-3xl">Bebidas</h2>
       </div>
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
-        id="menu"
-      >
-        <div class="flex gap-2 w-full">
-          <img
-            src="./assets/refri-1.png"
-            alt="Coca lata"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div class="w-full">
-            <p class="font-bold">Coca lata</p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 6,00</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Coca lata"
-                data-price="6"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Coca lata"
-                data-price="6"
-                aria-label="Adicionar Coca lata ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
-
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="flex gap-2 w-full">
-          <img
-            src="./assets/refri-2.png"
-            alt="Guaraná lata"
-            class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-          />
-          <div class="w-full">
-            <p class="font-bold">Guaraná lata</p>
-            <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
-              <p class="font-bold text-lg">R$ 6,00</p>
-              <!-- <button
-                class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                data-name="Guarana lata"
-                data-price="6"
-              >
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-              </button> -->
-              <button
-                type="button"
-                class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
-                data-name="Guarana lata"
-                data-price="6"
-                aria-label="Adicionar Guarana lata ao carrinho"
-              >
-                <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
-
-                <span>Adicionar</span>
-              </button>
-            </div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
+        
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/refri-1.png"
+        alt="Coca lata"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold">Coca lata</p>
+        
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 6,00</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="coca-lata"
+            data-name="Coca lata"
+            data-price="6"
+            aria-label="Adicionar Coca lata ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
         </div>
       </div>
-    </div>
+    </article>
+
+    <article class="flex gap-2 w-full">
+      <img
+        src="./assets/refri-2.png"
+        alt="Guaraná lata"
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+      />
+      <div class="w-full">
+        <p class="font-bold">Guaraná lata</p>
+        
+        <div class="flex flex-wrap items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ 6,00</p>
+          <button
+            type="button"
+            class="add-to-cart-btn inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-sm px-3 py-2 rounded min-h-[44px]"
+            data-product-id="guarana-lata"
+            data-name="Guaraná lata"
+            data-price="6"
+            aria-label="Adicionar Guaraná lata ao carrinho"
+          >
+            <i class="fa fa-cart-plus text-lg" aria-hidden="true"></i>
+            <span>Adicionar</span>
+          </button>
+        </div>
+      </div>
+    </article>
+      </div>
+    </main>
+<!-- CATALOG:END -->
     <!-- <div
       class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden"
       id="cart-modal"
