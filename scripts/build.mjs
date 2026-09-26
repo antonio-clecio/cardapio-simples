@@ -15,6 +15,7 @@ const runtimeFiles = [
   "src/domain/business-hours.js",
   "src/domain/cart.js",
   "src/domain/money.js",
+  "src/services/whatsapp.js",
   "src/ui/store-status.js",
 ];
 

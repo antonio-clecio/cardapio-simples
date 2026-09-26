@@ -10,6 +10,7 @@ import {
 } from "./domain/cart.js";
 import { checkRestaurantOpen } from "./domain/business-hours.js";
 import { startStoreStatus } from "./ui/store-status.js";
+import { buildWhatsAppUrl } from "./services/whatsapp.js";
 
 const menu = document.getElementById("menu");
 const cartBtn = document.getElementById("cart-btn");
@@ -457,13 +458,13 @@ addressInput.addEventListener("input", function () {
   }
 });
 
-function buildWhatsAppUrl(phone, message) {
-  const url = new URL(`https://wa.me/${phone}`);
+// function buildWhatsAppUrl(phone, message) {
+//   const url = new URL(`https://wa.me/${phone}`);
 
-  url.searchParams.set("text", message);
+//   url.searchParams.set("text", message);
 
-  return url.href;
-}
+//   return url.href;
+// }
 
 // checkoutBtn.addEventListener("click", function () {
 //   const isOpen = checkRestaurantOpen();
