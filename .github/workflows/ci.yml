@@ -1,0 +1,60 @@
+name: CI do cardapio
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cardapio-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Cardapio - testes e build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    env:
+      CI: "true"
+
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.18.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependencias pelo lockfile
+        run: npm ci --include=dev
+
+      - name: Executar testes unitarios
+        run: npm test
+
+      - name: Instalar Chromium e dependencias do sistema
+        run: npx playwright install --with-deps chromium
+
+      - name: Executar build e testes E2E
+        run: npm run test:e2e
+
+      - name: Guardar evidencias das falhas
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: falhas-playwright-${{ github.run_id }}-${{ github.run_attempt }}
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 7
