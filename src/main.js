@@ -621,6 +621,12 @@ checkoutForm.addEventListener("submit", function (event) {
     })
     .join("\n");
 
+  const phone = "5561992890048";
+
+  const message = [cartItems, `Endereço: ${addressInput.value.trim()}`].join(
+    "\n",
+  );
+
   const whatsappUrl = buildWhatsAppUrl(phone, message);
 
   window.open(whatsappUrl, "_blank");
